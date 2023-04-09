@@ -232,9 +232,51 @@ int parse_function(const char* path, Header *header){
     return 0;
 }
 
-void findall(const char* path){
+void findall(const char* path, int one) {
+    DIR *dir = NULL;
+    struct dirent *entry = NULL;
+    char fullPath[512];
+    struct stat statbuf;
+    Header header;
 
+    dir = opendir(path);
+    if (dir == NULL) {
+        printf("ERROR\ninvalid directory path");
+        return;
+    }
+
+    if (one == 0) {
+        printf("SUCCESS\n");
+        one++;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0) {
+            snprintf(fullPath, 512, "%s/%s", path, entry->d_name);
+            if (lstat(fullPath, &statbuf) == 0) {
+                if (S_ISREG(statbuf.st_mode)) {
+                    if (parse_function(fullPath, &header) == 0) {
+                        int has_large_section = 0;
+                        for (int i = 0; i < header.no_of_sections; i++) {
+                            if (header.section_headers[i].sect_size > 1407) {
+                                has_large_section = 1;
+                                
+                            }
+                        }
+                        if (!has_large_section) {
+                            printf("%s\n", fullPath);
+                        }
+                    }
+                } else if (S_ISDIR(statbuf.st_mode)) {
+                    findall(fullPath, one);
+                }
+            }
+        }
+    }
+
+    closedir(dir);
 }
+
 
 int main(int argc, char **argv){
     if(argc >= 2){
@@ -244,6 +286,7 @@ int main(int argc, char **argv){
         else{
         int list=-1;
         int parse=-1;
+        int find_all=-1;
         for(int i=1;i<argc;i++){
         	if(strcmp(argv[i], "list") == 0){
         	list=0;
@@ -253,6 +296,10 @@ int main(int argc, char **argv){
         	parse=0;
         	break;
         	}
+            if(strcmp(argv[i], "findall") == 0){
+        	find_all=0;
+        	break;
+            }
         }
         if(list==0){
         char* path=NULL;
@@ -316,7 +363,16 @@ int main(int argc, char **argv){
             parse_function(path, &header);
         }
 
-        
+        if(find_all==0){
+            char* path=NULL;
+
+            for(int i=1;i<argc;i++){
+        	    if(strncmp(argv[i], "path=", 5)==0){
+        	    path=argv[i]+5;
+                }
+            }
+            findall(path,0);
+        }
 
     }
     }
