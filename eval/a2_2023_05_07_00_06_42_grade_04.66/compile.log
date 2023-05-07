@@ -1,0 +1,28 @@
+a2.c: In function 'main':
+a2.c:63:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+   63 |             pthread_t tid1=-1;
+      |                            ^
+a2.c:64:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+   64 |             pthread_t tid2=-1;
+      |                            ^
+a2.c:65:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+   65 |             pthread_t tid3=-1;
+      |                            ^
+a2.c:66:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+   66 |             pthread_t tid4=-1;
+      |                            ^
+a2.c:110:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  110 |             pthread_t tid1=-1;
+      |                            ^
+a2.c:111:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  111 |             pthread_t tid2=-1;
+      |                            ^
+a2.c:112:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  112 |             pthread_t tid3=-1;
+      |                            ^
+a2.c:113:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  113 |             pthread_t tid4=-1;
+      |                            ^
+a2.c:114:28: warning: initialization of 'pthread_t' {aka 'struct __pthread *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  114 |             pthread_t tid5=-1;
+      |                            ^
