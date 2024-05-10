@@ -1,2 +1,2 @@
 # OS Projects
-This repository contains three projects developed in Linux operating system using the C programming language.
+This repository contains three Linux operating system homeworks using the C programming language.
